@@ -7,3 +7,22 @@
 //
 
 import Foundation
+import MapKit
+import SwiftUI
+
+
+struct MapView: UIViewRepresentable {
+    typealias UIViewType = MKMapView
+    
+    func makeUIView(context: Context) -> MKMapView {
+        let mkMapView = MKMapView()
+        
+        return mkMapView
+    }
+    
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+        
+    }
+    
+    
+}

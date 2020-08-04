@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FA160B7224D9A5DE00012A37 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA160B7124D9A5DE00012A37 /* MapView.swift */; };
 		FAE16E3024D9442900A175CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE16E2F24D9442900A175CB /* AppDelegate.swift */; };
 		FAE16E3224D9442900A175CB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE16E3124D9442900A175CB /* SceneDelegate.swift */; };
 		FAE16E3524D9442900A175CB /* BucketList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAE16E3324D9442900A175CB /* BucketList.xcdatamodeld */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FA160B7124D9A5DE00012A37 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		FAE16E2C24D9442900A175CB /* BucketList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BucketList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE16E2F24D9442900A175CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAE16E3124D9442900A175CB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				FAE16E3624D9442900A175CB /* ContentView.swift */,
+				FA160B7124D9A5DE00012A37 /* MapView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -179,6 +182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA160B7224D9A5DE00012A37 /* MapView.swift in Sources */,
 				FAE16E3024D9442900A175CB /* AppDelegate.swift in Sources */,
 				FAE16E3524D9442900A175CB /* BucketList.xcdatamodeld in Sources */,
 				FAE16E3724D9442900A175CB /* ContentView.swift in Sources */,

@@ -60,7 +60,7 @@
 			children = (
 				FAE16E2F24D9442900A175CB /* AppDelegate.swift */,
 				FAE16E3124D9442900A175CB /* SceneDelegate.swift */,
-				FAE16E3624D9442900A175CB /* ContentView.swift */,
+				FAE16E4624D9444300A175CB /* Views */,
 				FAE16E3824D9442A00A175CB /* Assets.xcassets */,
 				FAE16E3D24D9442A00A175CB /* LaunchScreen.storyboard */,
 				FAE16E4024D9442A00A175CB /* Info.plist */,
@@ -76,6 +76,14 @@
 				FAE16E3B24D9442A00A175CB /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FAE16E4624D9444300A175CB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FAE16E3624D9442900A175CB /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

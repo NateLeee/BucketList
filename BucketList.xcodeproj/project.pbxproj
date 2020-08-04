@@ -15,6 +15,7 @@
 		FAE16E3C24D9442A00A175CB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAE16E3B24D9442A00A175CB /* Preview Assets.xcassets */; };
 		FAE16E3F24D9442A00A175CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAE16E3D24D9442A00A175CB /* LaunchScreen.storyboard */; };
 		FAE16E4824D976E600A175CB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE16E4724D976E600A175CB /* User.swift */; };
+		FAE16E4B24D9785C00A175CB /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE16E4A24D9785C00A175CB /* FileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		FAE16E3E24D9442A00A175CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAE16E4024D9442A00A175CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAE16E4724D976E600A175CB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FAE16E4A24D9785C00A175CB /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 				FAE16E3124D9442900A175CB /* SceneDelegate.swift */,
 				FAE16E4924D976E900A175CB /* Models */,
 				FAE16E4624D9444300A175CB /* Views */,
+				FAE16E4C24D9786200A175CB /* Helpers */,
 				FAE16E3824D9442A00A175CB /* Assets.xcassets */,
 				FAE16E3D24D9442A00A175CB /* LaunchScreen.storyboard */,
 				FAE16E4024D9442A00A175CB /* Info.plist */,
@@ -95,6 +98,14 @@
 				FAE16E4724D976E600A175CB /* User.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FAE16E4C24D9786200A175CB /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FAE16E4A24D9785C00A175CB /* FileManager.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -171,6 +182,7 @@
 				FAE16E3024D9442900A175CB /* AppDelegate.swift in Sources */,
 				FAE16E3524D9442900A175CB /* BucketList.xcdatamodeld in Sources */,
 				FAE16E3724D9442900A175CB /* ContentView.swift in Sources */,
+				FAE16E4B24D9785C00A175CB /* FileManager.swift in Sources */,
 				FAE16E4824D976E600A175CB /* User.swift in Sources */,
 				FAE16E3224D9442900A175CB /* SceneDelegate.swift in Sources */,
 			);

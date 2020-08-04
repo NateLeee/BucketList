@@ -6,6 +6,7 @@
 //  Copyright © 2020 Nate Lee. All rights reserved.
 //
 
+import Foundation
 import SwiftUI
 
 struct ContentView: View {
@@ -14,7 +15,9 @@ struct ContentView: View {
         Text("Hello World")
             .onTapGesture {
                 let str = "Test Message"
-                let url = self.getDocumentsDir().appendingPathComponent("message.txt")
+                
+                let url = FileManager.default.getDocumentsDirectory().appendingPathComponent("message.txt")
+                // let url = self.getDocumentsDir().appendingPathComponent("message.txt")
                 
                 do {
                     try str.write(to: url, atomically: true, encoding: .utf8)

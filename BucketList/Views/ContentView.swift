@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         Text("Hello World")
             .onTapGesture {
-                let str = "Test Message"
+                let str = "Test Message - 2"
                 
                 let url = FileManager.default.getDocumentsDirectory().appendingPathComponent("message.txt")
                 // let url = self.getDocumentsDir().appendingPathComponent("message.txt")

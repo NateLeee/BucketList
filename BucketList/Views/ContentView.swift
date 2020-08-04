@@ -9,24 +9,42 @@
 import Foundation
 import SwiftUI
 
+
+struct SuccessView: View {
+    var body: some View {
+        Text("Success!")
+    }
+}
+
+struct LoadingView: View {
+    var body: some View {
+        Text("Loading...")
+    }
+}
+
+struct FailedView: View {
+    var body: some View {
+        Text("Failed.")
+    }
+}
+
+
 struct ContentView: View {
+    enum LoadingState {
+        case loading, success, failed
+    }
+    
+    var loadingState: LoadingState = .loading
     
     var body: some View {
-        Text("Hello World")
-            .onTapGesture {
-                let str = "Test Message - 2"
-                
-                let url = FileManager.default.getDocumentsDirectory().appendingPathComponent("message.txt")
-                // let url = self.getDocumentsDir().appendingPathComponent("message.txt")
-                
-                do {
-                    try str.write(to: url, atomically: true, encoding: .utf8)
-                    
-                    let input = try String(contentsOf: url)
-                    print(input)
-                } catch {
-                    print(error.localizedDescription)
-                }
+        Group {
+            if loadingState == .success {
+                SuccessView()
+            } else if (loadingState == .loading) {
+                LoadingView()
+            } else if (loadingState == .failed) {
+                FailedView()
+            }
         }
     }
     

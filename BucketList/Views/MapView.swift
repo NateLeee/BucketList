@@ -18,7 +18,7 @@ struct MapView: UIViewRepresentable {
     var annotations: [MKPointAnnotation]
     
     class Coordinator: NSObject, MKMapViewDelegate {
-        let parent: MapView
+        var parent: MapView // I used 'let' before.
         
         init(_ parent: MapView) {
             self.parent = parent
@@ -29,6 +29,7 @@ struct MapView: UIViewRepresentable {
             parent.centerCoordinate = mapView.centerCoordinate
         }
         
+        /*
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             let identifier = "Placemark"
             var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
@@ -45,6 +46,7 @@ struct MapView: UIViewRepresentable {
             
             return annotationView
         }
+         */
     }
     
     func makeCoordinator() -> Coordinator {

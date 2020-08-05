@@ -15,6 +15,9 @@ struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
     
     @Binding var centerCoordinate: CLLocationCoordinate2D
+    @Binding var selectedPlaceAnnotation: MKPointAnnotation?
+    @Binding var showingPlaceDetails: Bool
+    
     var annotations: [MKPointAnnotation]
     
     class Coordinator: NSObject, MKMapViewDelegate {
@@ -55,6 +58,7 @@ struct MapView: UIViewRepresentable {
             // whether it's a new view or a recycled one, send it back
             return annotationView
         }
+        
         /*
         func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
             let identifier = "Placemark"
@@ -62,7 +66,8 @@ struct MapView: UIViewRepresentable {
             
             if annotationView == nil {
                 // Create one!
-                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier) // It should be MKPinAnnotationView!!!
+                // It should be MKPinAnnotationView!!!
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 annotationView?.canShowCallout = true
                 annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
             } else {
@@ -72,7 +77,16 @@ struct MapView: UIViewRepresentable {
             
             return annotationView
         }
-         */
+        */
+        
+        // Tells the delegate that the user tapped one of the annotation view’s accessory buttons.
+        func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+            guard let placemark = view.annotation as? MKPointAnnotation else { return }
+            
+            parent.selectedPlaceAnnotation = placemark
+            parent.showingPlaceDetails = true
+        }
+        
     }
     
     func makeCoordinator() -> Coordinator {

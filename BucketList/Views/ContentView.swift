@@ -39,6 +39,7 @@ struct ContentView: View {
                     Button(action: {
                         // Create a new location
                         let newLocation = MKPointAnnotation()
+                        // 
                         newLocation.title = "Example Title"
                         newLocation.coordinate = self.centerCoordinate
                         

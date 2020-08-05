@@ -26,8 +26,24 @@ struct MapView: UIViewRepresentable {
         
         // Delegate funcs
         func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-            // print(mapView.centerCoordinate)
             parent.centerCoordinate = mapView.centerCoordinate
+        }
+        
+        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+            let identifier = "Placemark"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+            
+            if annotationView == nil {
+                // Create one!
+                annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                annotationView?.canShowCallout = true
+                annotationView?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            } else {
+                // Reuse, may have to update the annotation inside.
+                annotationView?.annotation = annotation
+            }
+            
+            return annotationView
         }
     }
     

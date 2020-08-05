@@ -8,50 +8,54 @@
 
 import Foundation
 import SwiftUI
-import LocalAuthentication
-
+import MapKit
 
 
 struct ContentView: View {
-    @State private var isUnlocked = false
+    
+    @State private var centerCoordinate = CLLocationCoordinate2D()
+    @State private var locations = [MKPointAnnotation]()
     
     var body: some View {
-        VStack {
-            if (isUnlocked) {
-                Text("Unlocked!")
-            } else {
-                Text("Locked.")
+        ZStack {
+            MapView(centerCoordinate: $centerCoordinate, annotations: locations)
+                .edgesIgnoringSafeArea(.all)
+            
+            Circle()
+                .fill(Color.blue)
+                .opacity(0.3)
+                .frame(width: 32, height: 32)
+            
+            VStack {
+                Spacer()
+                
+                HStack {
+                    Spacer()
+                    
+                    Button(action: {
+                        // TODO: - create a new location
+                        let newLocation = MKPointAnnotation()
+                        newLocation.coordinate = self.centerCoordinate
+                        
+                        self.locations.append(newLocation)
+                        
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                    .padding()
+                    .background(Color.black.opacity(0.63))
+                    .foregroundColor(.white)
+                    .font(.title)
+                    .clipShape(Circle())
+                    .shadow(color: .black, radius: 18, x: 0, y: 0)
+                    .padding([.trailing, .bottom])
+                }
             }
         }
-        .onAppear(perform: authenticate)
-        
     }
     
     // Custom Funcs Go Below.
-    func authenticate() {
-        let laContext = LAContext()
-        var error: NSError?
-        
-        // check whether biometric authentication is possible
-        if (laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)) {
-            // it's possible, so go ahead and use it
-            let reason = "We need to unlock your data."
-            
-            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { (success, authenticationError) in
-                DispatchQueue.main.async {
-                    if (success) {
-                        // authenticated successfully
-                        self.isUnlocked = true
-                    } else {
-                        // Failed!
-                        self.isUnlocked = false
-                    }
-                }
-            }
-        } else {
-            print("no biometrics")
-        }
-    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {

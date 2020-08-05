@@ -14,7 +14,9 @@ import SwiftUI
 struct MapView: UIViewRepresentable {
     typealias UIViewType = MKMapView
     
-    // MARK: - Coordinator Part
+    @Binding var centerCoordinate: CLLocationCoordinate2D
+    var annotations: [MKPointAnnotation]
+    
     class Coordinator: NSObject, MKMapViewDelegate {
         let parent: MapView
         
@@ -22,40 +24,32 @@ struct MapView: UIViewRepresentable {
             self.parent = parent
         }
         
+        // Delegate funcs
         func mapViewDidChangeVisibleRegion(_ mapView: MKMapView) {
-            print(mapView.centerCoordinate)
-        }
-        
-        func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-            let view = MKPinAnnotationView(annotation: annotation, reuseIdentifier: nil)
-            view.canShowCallout = true
-            
-            return view
+            // print(mapView.centerCoordinate)
+            parent.centerCoordinate = mapView.centerCoordinate
         }
     }
     
     func makeCoordinator() -> Coordinator {
-        let coordinator = Coordinator(self)
-        return coordinator
+        Coordinator(self)
     }
     
     func makeUIView(context: Context) -> MKMapView {
         let mkMapView = MKMapView()
         mkMapView.delegate = context.coordinator
         
-        // Annotation Example
-        let annotation = MKPointAnnotation()
-        annotation.title = "London"
-        annotation.subtitle = "Capital of England"
-        annotation.coordinate = CLLocationCoordinate2D(latitude: 51.5, longitude: 0.13)
-        mkMapView.addAnnotation(annotation)
+        // MARK: - Annotation Part
+        
         
         return mkMapView
     }
     
     func updateUIView(_ uiView: MKMapView, context: Context) {
-        
+        if annotations.count != uiView.annotations.count {
+            uiView.removeAnnotations(uiView.annotations)
+            uiView.addAnnotations(annotations)
+        }
     }
-    
     
 }

@@ -16,6 +16,10 @@ struct ContentView: View {
     @State private var centerCoordinate = CLLocationCoordinate2D()
     @State private var locations = [MKPointAnnotation]()
     
+    var hasNotch: Bool {
+        return UIScreen.main.bounds.height >= 812
+    }
+    
     var body: some View {
         ZStack {
             MapView(centerCoordinate: $centerCoordinate, annotations: locations)
@@ -49,7 +53,7 @@ struct ContentView: View {
                     .font(.title)
                     .clipShape(Circle())
                     .shadow(color: .black, radius: 18, x: 0, y: 0)
-                    .padding([.trailing, .bottom])
+                    .padding(hasNotch ? [.trailing] : [.trailing, .bottom])
                 }
             }
         }

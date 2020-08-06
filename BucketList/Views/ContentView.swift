@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var selectedPlaceAnnotation: MKPointAnnotation?
     @State private var showingPlaceDetails: Bool = false
     @State private var locations = [MKPointAnnotation]()
+    @State private var showingEditScreen = false
     
     var hasNotch: Bool {
         return UIScreen.main.bounds.height >= 812
@@ -46,11 +47,14 @@ struct ContentView: View {
                     Button(action: {
                         // Create a new location
                         let newLocation = MKPointAnnotation()
-                        //
+                        // Do something
                         newLocation.title = "Example Title"
+                        newLocation.subtitle = "Example Subtitle"
                         newLocation.coordinate = self.centerCoordinate
                         
+                        self.selectedPlaceAnnotation = newLocation
                         self.locations.append(newLocation)
+                        self.showingEditScreen = true
                         
                     }) {
                         Image(systemName: "plus")
@@ -72,7 +76,13 @@ struct ContentView: View {
                 primaryButton: .default(Text("OK")),
                 secondaryButton: .default(Text("Edit")) {
                     // edit this place
+                    self.showingEditScreen = true
                 })
+        }
+        .sheet(isPresented: $showingEditScreen) {
+            if self.selectedPlaceAnnotation != nil {
+                EditView(placemark: self.selectedPlaceAnnotation!)
+            }
         }
     }
     

@@ -10,6 +10,7 @@
 		FA160B7224D9A5DE00012A37 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA160B7124D9A5DE00012A37 /* MapView.swift */; };
 		FA160B7424DA637500012A37 /* MKPointAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA160B7324DA637500012A37 /* MKPointAnnotation.swift */; };
 		FA160B7624DBAA4B00012A37 /* MKPointAnnotation-ObservableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA160B7524DBAA4B00012A37 /* MKPointAnnotation-ObservableObject.swift */; };
+		FA160B7824DBAB2400012A37 /* EditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA160B7724DBAB2400012A37 /* EditView.swift */; };
 		FAE16E3024D9442900A175CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE16E2F24D9442900A175CB /* AppDelegate.swift */; };
 		FAE16E3224D9442900A175CB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE16E3124D9442900A175CB /* SceneDelegate.swift */; };
 		FAE16E3524D9442900A175CB /* BucketList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FAE16E3324D9442900A175CB /* BucketList.xcdatamodeld */; };
@@ -18,13 +19,14 @@
 		FAE16E3C24D9442A00A175CB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FAE16E3B24D9442A00A175CB /* Preview Assets.xcassets */; };
 		FAE16E3F24D9442A00A175CB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAE16E3D24D9442A00A175CB /* LaunchScreen.storyboard */; };
 		FAE16E4824D976E600A175CB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE16E4724D976E600A175CB /* User.swift */; };
-		FAE16E4B24D9785C00A175CB /* FileManager+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE16E4A24D9785C00A175CB /* FileManager+Ext.swift */; };
+		FAE16E4B24D9785C00A175CB /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE16E4A24D9785C00A175CB /* FileManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		FA160B7124D9A5DE00012A37 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		FA160B7324DA637500012A37 /* MKPointAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MKPointAnnotation.swift; sourceTree = "<group>"; };
 		FA160B7524DBAA4B00012A37 /* MKPointAnnotation-ObservableObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MKPointAnnotation-ObservableObject.swift"; sourceTree = "<group>"; };
+		FA160B7724DBAB2400012A37 /* EditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditView.swift; sourceTree = "<group>"; };
 		FAE16E2C24D9442900A175CB /* BucketList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BucketList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE16E2F24D9442900A175CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FAE16E3124D9442900A175CB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -35,7 +37,7 @@
 		FAE16E3E24D9442A00A175CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FAE16E4024D9442A00A175CB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAE16E4724D976E600A175CB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		FAE16E4A24D9785C00A175CB /* FileManager+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Ext.swift"; sourceTree = "<group>"; };
+		FAE16E4A24D9785C00A175CB /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 			children = (
 				FAE16E3624D9442900A175CB /* ContentView.swift */,
 				FA160B7124D9A5DE00012A37 /* MapView.swift */,
+				FA160B7724DBAB2400012A37 /* EditView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -110,7 +113,7 @@
 		FAE16E4C24D9786200A175CB /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				FAE16E4A24D9785C00A175CB /* FileManager+Ext.swift */,
+				FAE16E4A24D9785C00A175CB /* FileManager.swift */,
 				FA160B7324DA637500012A37 /* MKPointAnnotation.swift */,
 				FA160B7524DBAA4B00012A37 /* MKPointAnnotation-ObservableObject.swift */,
 			);
@@ -193,7 +196,8 @@
 				FAE16E3524D9442900A175CB /* BucketList.xcdatamodeld in Sources */,
 				FAE16E3724D9442900A175CB /* ContentView.swift in Sources */,
 				FA160B7624DBAA4B00012A37 /* MKPointAnnotation-ObservableObject.swift in Sources */,
-				FAE16E4B24D9785C00A175CB /* FileManager+Ext.swift in Sources */,
+				FAE16E4B24D9785C00A175CB /* FileManager.swift in Sources */,
+				FA160B7824DBAB2400012A37 /* EditView.swift in Sources */,
 				FAE16E4824D976E600A175CB /* User.swift in Sources */,
 				FAE16E3224D9442900A175CB /* SceneDelegate.swift in Sources */,
 				FA160B7424DA637500012A37 /* MKPointAnnotation.swift in Sources */,

@@ -21,6 +21,7 @@ struct UnlockedView: View {
     @Binding var showingEditScreen: Bool
     
     var hasNotch: Bool {
+        // Forgive my implementation here, it's not perfect, works for now.
         return UIScreen.main.bounds.height >= 812
     }
     

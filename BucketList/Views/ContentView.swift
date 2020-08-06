@@ -9,9 +9,11 @@
 import Foundation
 import SwiftUI
 import MapKit
+import LocalAuthentication
 
 
 struct ContentView: View {
+    @State private var isUnlocked = false
     
     @State private var centerCoordinate = CLLocationCoordinate2D()
     @State private var selectedPlaceAnnotation: MKPointAnnotation?
@@ -25,48 +27,60 @@ struct ContentView: View {
     
     var body: some View {
         ZStack {
-            MapView(
-                centerCoordinate: $centerCoordinate,
-                selectedPlaceAnnotation: $selectedPlaceAnnotation,
-                showingPlaceDetails: $showingPlaceDetails,
-                annotations: locations
-            )
-                .edgesIgnoringSafeArea(.all)
-            
-            Circle()
-                .fill(Color.blue)
-                .opacity(0.3)
-                .frame(width: 32, height: 32)
-            
-            VStack {
-                Spacer()
+            if (isUnlocked) {
+                MapView(
+                    centerCoordinate: $centerCoordinate,
+                    selectedPlaceAnnotation: $selectedPlaceAnnotation,
+                    showingPlaceDetails: $showingPlaceDetails,
+                    annotations: locations
+                )
+                    .edgesIgnoringSafeArea(.all)
                 
-                HStack {
+                Circle()
+                    .fill(Color.blue)
+                    .opacity(0.3)
+                    .frame(width: 32, height: 32)
+                
+                // "+" Button
+                VStack {
                     Spacer()
                     
-                    Button(action: {
-                        // Create a new location
-                        let newLocation = CodableMKPointAnnotation()
-                        // Do something
-                        newLocation.title = "Example Title"
-                        newLocation.subtitle = "Example Subtitle"
-                        newLocation.coordinate = self.centerCoordinate
+                    HStack {
+                        Spacer()
                         
-                        self.selectedPlaceAnnotation = newLocation
-                        self.locations.append(newLocation)
-                        self.showingEditScreen = true
-                        
-                    }) {
-                        Image(systemName: "plus")
+                        Button(action: {
+                            // Create a new location
+                            let newLocation = CodableMKPointAnnotation()
+                            // Do something
+                            newLocation.title = "Example Title"
+                            newLocation.subtitle = "Example Subtitle"
+                            newLocation.coordinate = self.centerCoordinate
+                            
+                            self.selectedPlaceAnnotation = newLocation
+                            self.locations.append(newLocation)
+                            self.showingEditScreen = true
+                            
+                        }) {
+                            Image(systemName: "plus")
+                        }
+                        .padding()
+                        .background(Color.black.opacity(0.63))
+                        .foregroundColor(.white)
+                        .font(.title)
+                        .clipShape(Circle())
+                        .shadow(color: .black, radius: 18, x: 0, y: 0)
+                        .padding(hasNotch ? [.trailing] : [.trailing, .bottom])
                     }
-                    .padding()
-                    .background(Color.black.opacity(0.63))
-                    .foregroundColor(.white)
-                    .font(.title)
-                    .clipShape(Circle())
-                    .shadow(color: .black, radius: 18, x: 0, y: 0)
-                    .padding(hasNotch ? [.trailing] : [.trailing, .bottom])
                 }
+            } else {
+                // Unlock Button
+                Button("Unlock") {
+                    self.authenticate()
+                }
+                .padding()
+                .background(Color.blue)
+                .foregroundColor(.white)
+                .clipShape(Capsule())
             }
         }
         .alert(isPresented: $showingPlaceDetails) {
@@ -112,6 +126,28 @@ struct ContentView: View {
             try data.write(to: filename, options: [.atomicWrite, .completeFileProtection])
         } catch {
             print("Unable to save data.")
+        }
+    }
+    
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Please authenticate yourself to unlock your places."
+
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+
+                DispatchQueue.main.async {
+                    if success {
+                        self.isUnlocked = true
+                    } else {
+                        // error
+                    }
+                }
+            }
+        } else {
+            // no biometrics
         }
     }
 }

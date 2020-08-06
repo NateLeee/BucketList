@@ -14,9 +14,10 @@ import LocalAuthentication
 
 struct UnlockedView: View {
     @State private var centerCoordinate = CLLocationCoordinate2D()
+    
     @Binding var selectedPlaceAnnotation: MKPointAnnotation?
     @Binding var showingPlaceDetails: Bool
-    @State private var locations = [CodableMKPointAnnotation]()
+    @Binding var locations: [CodableMKPointAnnotation]
     @Binding var showingEditScreen: Bool
     
     var hasNotch: Bool {
@@ -79,8 +80,8 @@ struct ContentView: View {
     @State private var isUnlocked = false
     
     //    @State private var centerCoordinate = CLLocationCoordinate2D()
-    @State private var selectedPlaceAnnotation: MKPointAnnotation?
-    @State private var locations = [CodableMKPointAnnotation]()
+    @State private var selectedPlaceAnnotation: MKPointAnnotation? // This is necessary!
+    @State private var locations = [CodableMKPointAnnotation]() // This is necessary!
     
     @State private var showingPlaceDetails: Bool = false
     @State private var showingEditScreen = false
@@ -89,7 +90,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             if (isUnlocked) {
-                UnlockedView(selectedPlaceAnnotation: $selectedPlaceAnnotation, showingPlaceDetails: $showingPlaceDetails, showingEditScreen: $showingEditScreen)
+                UnlockedView(selectedPlaceAnnotation: $selectedPlaceAnnotation, showingPlaceDetails: $showingPlaceDetails, locations: $locations, showingEditScreen: $showingEditScreen)
             } else {
                 // Unlock Button
                 Button("Unlock") {

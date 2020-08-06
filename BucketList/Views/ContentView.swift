@@ -85,6 +85,8 @@ struct ContentView: View {
     @State private var locations = [CodableMKPointAnnotation]() // This is necessary!
     
     @State private var showingPlaceDetails: Bool = false
+    @State private var showingAuthenticationErrorAlert: Bool = false
+    
     @State private var showingEditScreen = false
     
     
@@ -104,7 +106,10 @@ struct ContentView: View {
             }
         }
         .alert(isPresented: $showingPlaceDetails) {
-            Alert(
+            if (self.showingAuthenticationErrorAlert) {
+                return Alert(title: Text("Authentication Failed"), message: Text("Oops, back luck, isn't it?"), dismissButton: .default(Text("Fine")))
+            } else {
+                return Alert(
                 title: Text(selectedPlaceAnnotation?.title ?? "Unknown"),
                 message: Text(selectedPlaceAnnotation?.subtitle ?? "Missing place information."),
                 primaryButton: .default(Text("OK")),
@@ -112,6 +117,7 @@ struct ContentView: View {
                     // edit this place
                     self.showingEditScreen = true
                 })
+            }
         }
         .sheet(isPresented: $showingEditScreen, onDismiss: saveData) {
             if self.selectedPlaceAnnotation != nil {
@@ -163,6 +169,8 @@ struct ContentView: View {
                         self.isUnlocked = true
                     } else {
                         // error
+                        self.showingPlaceDetails = true // Borrow this for temporary use
+                        self.showingAuthenticationErrorAlert = true
                     }
                 }
             }

@@ -62,14 +62,15 @@ struct ContentView: View {
                             
                         }) {
                             Image(systemName: "plus")
+                                .padding()
+                                .background(Color.black.opacity(0.63))
+                                .foregroundColor(.white)
+                                .font(.title)
+                                .clipShape(Circle())
+                                .shadow(color: .black, radius: 18, x: 0, y: 0)
+                                .padding(hasNotch ? [.trailing] : [.trailing, .bottom])
                         }
-                        .padding()
-                        .background(Color.black.opacity(0.63))
-                        .foregroundColor(.white)
-                        .font(.title)
-                        .clipShape(Circle())
-                        .shadow(color: .black, radius: 18, x: 0, y: 0)
-                        .padding(hasNotch ? [.trailing] : [.trailing, .bottom])
+                        
                     }
                 }
             } else {
@@ -109,7 +110,7 @@ struct ContentView: View {
     
     func loadData() {
         let filename = getDocumentsDirectory().appendingPathComponent("SavedPlaces")
-
+        
         do {
             let data = try Data(contentsOf: filename)
             locations = try JSONDecoder().decode([CodableMKPointAnnotation].self, from: data)
@@ -132,12 +133,12 @@ struct ContentView: View {
     func authenticate() {
         let context = LAContext()
         var error: NSError?
-
+        
         if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let reason = "Please authenticate yourself to unlock your places."
-
+            
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-
+                
                 DispatchQueue.main.async {
                     if success {
                         self.isUnlocked = true

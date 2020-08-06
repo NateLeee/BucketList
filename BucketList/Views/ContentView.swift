@@ -12,27 +12,25 @@ import MapKit
 import LocalAuthentication
 
 
-struct ContentView: View {
-    @State private var isUnlocked = false
-    
+struct UnlockedView: View {
     @State private var centerCoordinate = CLLocationCoordinate2D()
-    @State private var selectedPlaceAnnotation: MKPointAnnotation?
-    @State private var showingPlaceDetails: Bool = false
+    @Binding var selectedPlaceAnnotation: MKPointAnnotation?
+    @Binding var showingPlaceDetails: Bool
     @State private var locations = [CodableMKPointAnnotation]()
-    @State private var showingEditScreen = false
+    @Binding var showingEditScreen: Bool
     
     var hasNotch: Bool {
         return UIScreen.main.bounds.height >= 812
     }
     
     var body: some View {
-        ZStack {
-            if (isUnlocked) {
+        GeometryReader { geo in
+            ZStack {
                 MapView(
-                    centerCoordinate: $centerCoordinate,
-                    selectedPlaceAnnotation: $selectedPlaceAnnotation,
-                    showingPlaceDetails: $showingPlaceDetails,
-                    annotations: locations
+                    centerCoordinate: self.$centerCoordinate,
+                    selectedPlaceAnnotation: self.$selectedPlaceAnnotation,
+                    showingPlaceDetails: self.$showingPlaceDetails,
+                    annotations: self.locations
                 )
                     .edgesIgnoringSafeArea(.all)
                 
@@ -68,11 +66,30 @@ struct ContentView: View {
                                 .font(.title)
                                 .clipShape(Circle())
                                 .shadow(color: .black, radius: 18, x: 0, y: 0)
-                                .padding(hasNotch ? [.trailing] : [.trailing, .bottom])
+                                .padding(self.hasNotch ? [.trailing] : [.trailing, .bottom])
                         }
-                        
                     }
                 }
+            }
+        }
+    }
+}
+
+struct ContentView: View {
+    @State private var isUnlocked = false
+    
+    //    @State private var centerCoordinate = CLLocationCoordinate2D()
+    @State private var selectedPlaceAnnotation: MKPointAnnotation?
+    @State private var locations = [CodableMKPointAnnotation]()
+    
+    @State private var showingPlaceDetails: Bool = false
+    @State private var showingEditScreen = false
+    
+    
+    var body: some View {
+        ZStack {
+            if (isUnlocked) {
+                UnlockedView(selectedPlaceAnnotation: $selectedPlaceAnnotation, showingPlaceDetails: $showingPlaceDetails, showingEditScreen: $showingEditScreen)
             } else {
                 // Unlock Button
                 Button("Unlock") {
